@@ -4,7 +4,29 @@ window.addEventListener("load", function(){
     canvas.width = this.window.innerWidth;
     canvas.height = this.window.innerHeight;
 
-   
+    let rad = 40000;
+    let imag = undefined;
+    let pxGap = 4;
+
+    let CRAD = document.getElementById("Rad");
+    let CPIX = document.getElementById("Pix");
+
+    let Irad = CRAD.value;
+    let Ipx = CPIX.value;
+    
+   const submitButton = this.document.getElementById("SB");
+    submitButton.addEventListener("click", function(){
+        console.log("Submit pressed fr");
+        Irad = CRAD.value;
+        Ipx = CPIX.value;
+
+        console.log(Irad +"," + Ipx)
+
+        rad = Irad;
+        pxGap = Ipx;
+        effect.reload;
+        
+    })
 
     class Particle {
         constructor(effect, x, y, color){
@@ -53,6 +75,8 @@ window.addEventListener("load", function(){
             this.ease = this.ease;
 
         }
+
+        
     }
 
     class Effect {
@@ -65,9 +89,9 @@ window.addEventListener("load", function(){
             this.centerY = this.height * 0.5;
             this.x = this.centerX - this.image.width * 0.5;
             this.y = this.centerY - this.image.height * 0.5;
-            this.gap = 4;
+            this.gap = pxGap;
             this.mouse = {
-                radius: 40000,
+                radius: rad,
                 x: undefined,
                 y:undefined
 
@@ -111,6 +135,7 @@ window.addEventListener("load", function(){
         warp(){
             this.particlesArray.forEach(particle => particle.warp());
         }
+        
     }
 
     const effect = new Effect(canvas.width, canvas.height);
@@ -129,5 +154,7 @@ window.addEventListener("load", function(){
     warpButton.addEventListener("click", function(){
         effect.warp();
     })
+
+    
 
 });
